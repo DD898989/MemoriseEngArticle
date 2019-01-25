@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace WindowsFormsApplication31
+namespace WindowsFormsApplication26
 {
     //====================================================================================
     //====================================================================================
@@ -118,6 +118,7 @@ namespace WindowsFormsApplication31
                 File.WriteAllText(ROOT_PATH + _sName + FILE_SOURCE, "");
             }
             tbSource.Text = File.ReadAllText(ROOT_PATH + _sName + FILE_SOURCE);
+            sourceChanged(this, null);
 
 
 
