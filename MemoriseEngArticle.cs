@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace WindowsFormsApplication26
+namespace WindowsFormsApplication1
 {
     //====================================================================================
     public partial class Form1 : Form
@@ -74,7 +74,7 @@ namespace WindowsFormsApplication26
                     if (!File.Exists(ROOT_PATH + name + FILE_SOURCE))
                     {
                         name = "ExampleArticle";
-                        File.WriteAllText(ROOT_PATH + name + FILE_SOURCE, 
+                        File.WriteAllText(ROOT_PATH + name + FILE_SOURCE,
                             "This is an example article for parcticing. Try to keep typing words that you seem from this box to the top-right box. Now you seem the word [ article ] is shown in red, and the next word is [ for ], so you should hit [ space ] then type [ for ] to finish the next word. And the dot mark means any single char, the semicolon mark means any continuous chars, the left-top and right-botton box are hints. You can explore other buttons by yourself, enjoy it.");
                         File.WriteAllText(ROOT_PATH + name + FILE_INPUT_TEMP, "t i a e.....e a;e");
                     }
@@ -231,23 +231,23 @@ namespace WindowsFormsApplication26
             int Len;
             Button btn = sender as Button;
             if (btn != null)
-                 Len = Convert.ToInt32(btn.Text);//hit btn
+                Len = Convert.ToInt32(btn.Text);//hit btn
             else
-                 Len = 1;//open program
+                Len = 1;//open program
 
             rtb_0_ShowChar.Clear();
             string merge = "";
-            for (int k = 0; k < _taShowChar.count; k++)
+            for (int k = 0; k < _taSource.count; k++)
             {
                 int len = 1;
-                if (_taShowChar.WordLen(k) >= Len)
+                if (_taSource.WordLen(k) >= Len)
                     len = Len;
 
-                merge += _taShowChar.Word(k).Substring(0, len);
-                merge += new String('_', _taShowChar.WordLen(k) - len);
-                merge += TextAnalyser.s_lsSourceMark[k] ;
-                if (k != _taShowChar.count - 1)
-                    merge += " " ;
+                merge += _taSource.Word(k).Substring(0, len);
+                merge += new String('_', _taSource.WordLen(k) - len);
+                merge += TextAnalyser.s_lsSourceMark[k];
+                if (k != _taSource.count - 1)
+                    merge += " ";
             }
 
             rtb_0_ShowChar.Text = merge;
@@ -274,8 +274,7 @@ namespace WindowsFormsApplication26
                 _oriHash = newHash;
 
             _taSource = new TextAnalyser(rtb_0_Source.Text, @"([a-zA-Z0-9\'\-]+)");
-            _taShowChar = new TextAnalyser(rtb_0_Source.Text, @"([a-zA-Z0-9\'\-]+)");
-            _taShowChar.AnalyzeSingleMarkForShowChar(rtb_0_Source.Text);
+            _taSource.AnalyzeSingleMarkForShowChar(rtb_0_Source.Text);
 
             btn_1_ShowChar_Click(this, null);
         }
@@ -353,7 +352,7 @@ namespace WindowsFormsApplication26
             RichTextBox rtb = sender as RichTextBox;
             if (rtb.SelectedText.Length > 0)
             {
-                HighlightText(rtb_0_Source, rtb.SelectedText, Color.Red,true);
+                HighlightText(rtb_0_Source, rtb.SelectedText, Color.Red, true);
             }
         }
         //----------------------------------------------------------------
@@ -362,7 +361,7 @@ namespace WindowsFormsApplication26
             if (idx > 140)
                 rtb.SelectionStart = idx - 140;
             else
-                rtb.SelectionStart = idx;
+                rtb.SelectionStart = 0;
 
             rtb.ScrollToCaret();
             rtb.ScrollToCaret();
