@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace WindowsFormsApplication1
+namespace WindowsFormsApplication3
 {
     //====================================================================================
     public partial class Form1 : Form
@@ -286,10 +286,7 @@ namespace WindowsFormsApplication1
 
             _taInput = new TextAnalyser(rtb_0_Input.Text, @"([a-zA-Z0-9;\.\'\-]+)");
 
-            if (_taInput.count > _taSource.count)
-                return;
-
-            if (_taInput.count < 1)
+            if (_taInput.count > _taSource.count || _taInput.count < 1)
                 return;
 
             string sLastInput = _taInput.Word(_taInput.count - 1).ToLower();
@@ -308,11 +305,19 @@ namespace WindowsFormsApplication1
             else if (sLastChar == ';')
                 rtb_0_Input.BackColor = Color.Brown;
             else if (sM1 == sLastSource)
-                rtb_0_Input.BackColor = Color.Black;
+                if(rtb_0_Input.Text[rtb_0_Input.Text.Length-1]==' ')
+                    rtb_0_Input.BackColor = Color.Black;
+                else
+                    rtb_0_Input.BackColor = Color.Brown;
             else if (sM2 == sLastSource)
                 rtb_0_Input.BackColor = Color.Brown;
             else
                 SendKeys.Send("{BACKSPACE}");
+
+            if (rtb_0_Input.BackColor == Color.Brown && rtb_0_Input.Text[rtb_0_Input.Text.Length - 1] == ' ')
+                SendKeys.Send("{BACKSPACE}");
+
+
 
 
             int idx;
