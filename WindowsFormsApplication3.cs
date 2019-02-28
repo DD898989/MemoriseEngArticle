@@ -279,6 +279,7 @@ namespace WindowsFormsApplication3
             btn_1_ShowChar_Click(this, null);
         }
         //----------------------------------------------------------------
+        static int spaceCount = 0;
         private void rtb_0_Input_TextChanged(object sender, EventArgs e)
         {
             if (rtb_0_Input.TextLength == 0)
@@ -290,33 +291,47 @@ namespace WindowsFormsApplication3
                 return;
 
             string sLastInput = _taInput.Word(_taInput.count - 1).ToLower();
+            string sLastInputRegex = sLastInput.Replace(";", ".+");
             string sLastSource = _taSource.Word(_taInput.count - 1).ToLower();
-
             char sLastChar = sLastInput[sLastInput.Length - 1];
-            sLastInput = sLastInput.Replace(";", ".+");
+            char sLastCharInTB = char.ToLower(rtb_0_Input.Text[rtb_0_Input.Text.Length - 1]);
 
-            string sM1 = Regex.Match(sLastSource, sLastInput, RegexOptions.RightToLeft).ToString();
-            string sM2 = Regex.Match(sLastSource, sLastInput + ".+", RegexOptions.RightToLeft).ToString();
 
-            if (sLastInput == ".")
-            { }
-            else if (sLastInput.Length == 1 && sLastSource[0] == sLastInput[0])
+            if (sLastCharInTB == ' ')
+                spaceCount++;
+
+            if (sLastInput == sLastSource[0].ToString())
+            {
                 rtb_0_Input.BackColor = Color.Black;
-            else if (sLastChar == ';')
-                rtb_0_Input.BackColor = Color.Brown;
-            else if (sM1 == sLastSource)
-                if (rtb_0_Input.Text[rtb_0_Input.Text.Length - 1] == ' ')
+                spaceCount = 0;
+            }
+            else if (sLastSource == Regex.Match(sLastSource, sLastInputRegex/*   */, RegexOptions.RightToLeft).ToString())
+            {
+                if (sLastCharInTB == ' ')
                     rtb_0_Input.BackColor = Color.Black;
                 else
                     rtb_0_Input.BackColor = Color.Brown;
-            else if (sM2 == sLastSource)
+
+                spaceCount = 0;
+            }
+            else if (sLastSource == Regex.Match(sLastSource, sLastInputRegex + ".+", RegexOptions.RightToLeft).ToString() && sLastCharInTB != ' ')
+            {
                 rtb_0_Input.BackColor = Color.Brown;
+            }
             else
-                SendKeys.Send("{BACKSPACE}");
-
-            if (rtb_0_Input.BackColor == Color.Brown && rtb_0_Input.Text[rtb_0_Input.Text.Length - 1] == ' ')
-                 SendKeys.Send("{BACKSPACE}");
-
+            {
+                Console.WriteLine(spaceCount);
+                if (spaceCount >= 2)
+                {
+                    spaceCount = 0;
+                }
+                else
+                {
+                    this.rtb_0_Input.TextChanged -= this.rtb_0_Input_TextChanged;
+                    SendKeys.Send("{BACKSPACE}");
+                    this.rtb_0_Input.TextChanged += this.rtb_0_Input_TextChanged;
+                }
+            }
 
 
 
