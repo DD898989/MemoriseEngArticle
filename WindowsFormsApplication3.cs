@@ -328,7 +328,14 @@ namespace WindowsFormsApplication3
                 else
                 {
                     this.rtb_0_Input.TextChanged -= this.rtb_0_Input_TextChanged;
-                    SendKeys.Send("{BACKSPACE}");
+                    try//for start the process
+                    {
+                        SendKeys.Send("{BACKSPACE}");
+                    }
+                    catch
+                    { 
+                    
+                    }
                     this.rtb_0_Input.TextChanged += this.rtb_0_Input_TextChanged;
                 }
             }
