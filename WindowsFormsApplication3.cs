@@ -295,17 +295,17 @@ namespace WindowsFormsApplication3
             char sLastChar = sLastInput[sLastInput.Length - 1];
             sLastInput = sLastInput.Replace(";", ".+");
 
-            Match m1 = Regex.Match(sLastSource, sLastInput, RegexOptions.RightToLeft);
-            string sM1 = m1.ToString();
-            Match m2 = Regex.Match(sLastSource, sLastInput + ".+", RegexOptions.RightToLeft);
-            string sM2 = m2.ToString();
+            string sM1 = Regex.Match(sLastSource, sLastInput, RegexOptions.RightToLeft).ToString();
+            string sM2 = Regex.Match(sLastSource, sLastInput + ".+", RegexOptions.RightToLeft).ToString();
 
-            if (sLastInput.Length == 1 && sLastSource[0] == sLastInput[0])
+            if (sLastInput == ".")
+            { }
+            else if (sLastInput.Length == 1 && sLastSource[0] == sLastInput[0])
                 rtb_0_Input.BackColor = Color.Black;
             else if (sLastChar == ';')
                 rtb_0_Input.BackColor = Color.Brown;
             else if (sM1 == sLastSource)
-                if(rtb_0_Input.Text[rtb_0_Input.Text.Length-1]==' ')
+                if (rtb_0_Input.Text[rtb_0_Input.Text.Length - 1] == ' ')
                     rtb_0_Input.BackColor = Color.Black;
                 else
                     rtb_0_Input.BackColor = Color.Brown;
@@ -315,7 +315,7 @@ namespace WindowsFormsApplication3
                 SendKeys.Send("{BACKSPACE}");
 
             if (rtb_0_Input.BackColor == Color.Brown && rtb_0_Input.Text[rtb_0_Input.Text.Length - 1] == ' ')
-                SendKeys.Send("{BACKSPACE}");
+                 SendKeys.Send("{BACKSPACE}");
 
 
 
