@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -15,7 +15,18 @@ namespace WindowsFormsApplication3
     public partial class Form1 : Form
     {
         //====================================================================================
-        const string ROOT_PATH = @"D:\MemoriseEngArgicle\";
+        string ROOT_PATH =
+           Directory.GetParent(
+           Directory.GetParent(
+           Directory.GetParent(
+           Directory.GetParent(
+               System.Reflection.Assembly.GetEntryAssembly().Location
+               ).FullName
+               ).FullName
+               ).FullName
+               ).FullName
+            +
+            @"\文章檔案\";
         const string FILE_LOAD_TEMP = @"Temp.txt";
         const string FILE_INPUT_TEMP = @".InputTemp.txt";
         const string FILE_SOURCE = @".Source.txt";
@@ -107,8 +118,7 @@ namespace WindowsFormsApplication3
             Initialize_Component();
             if (!File.Exists(ROOT_PATH + FILE_LOAD_TEMP))
             {
-                Directory.CreateDirectory(ROOT_PATH);
-                sCurrentArticle("");
+                throw new Exception("找不到檔案:"+ (ROOT_PATH + FILE_LOAD_TEMP));
             }
             else
             {
@@ -333,8 +343,8 @@ namespace WindowsFormsApplication3
                         SendKeys.Send("{BACKSPACE}");
                     }
                     catch
-                    { 
-                    
+                    {
+
                     }
                     this.rtb_0_Input.TextChanged += this.rtb_0_Input_TextChanged;
                 }
