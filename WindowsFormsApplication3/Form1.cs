@@ -289,7 +289,6 @@ namespace WindowsFormsApplication3
             btn_1_ShowChar_Click(this, null);
         }
         //----------------------------------------------------------------
-        static int spaceCount = 0;
         private void rtb_0_Input_TextChanged(object sender, EventArgs e)
         {
             if (rtb_0_Input.TextLength == 0)
@@ -307,47 +306,39 @@ namespace WindowsFormsApplication3
             char sLastCharInTB = char.ToLower(rtb_0_Input.Text[rtb_0_Input.Text.Length - 1]);
 
 
-            if (sLastCharInTB == ' ')
-                spaceCount++;
-
+            bool FALSE = false;
             if (sLastInput == sLastSource[0].ToString())
             {
-                rtb_0_Input.BackColor = Color.Black;
-                spaceCount = 0;
+                if(FALSE)
+                    rtb_0_Input.BackColor = Color.Black;
             }
             else if (sLastSource == Regex.Match(sLastSource, sLastInputRegex/*   */, RegexOptions.RightToLeft).ToString())
             {
-                if (sLastCharInTB == ' ')
-                    rtb_0_Input.BackColor = Color.Black;
-                else
-                    rtb_0_Input.BackColor = Color.Brown;
-
-                spaceCount = 0;
+                if (FALSE)
+                {
+                    if (sLastCharInTB == ' ')
+                        rtb_0_Input.BackColor = Color.Black;
+                    else
+                        rtb_0_Input.BackColor = Color.Brown;
+                }
             }
             else if (sLastSource == Regex.Match(sLastSource, sLastInputRegex + ".+", RegexOptions.RightToLeft).ToString() && sLastCharInTB != ' ')
             {
-                rtb_0_Input.BackColor = Color.Brown;
+                if (FALSE)
+                    rtb_0_Input.BackColor = Color.Brown;
             }
             else
             {
-                Console.WriteLine(spaceCount);
-                if (spaceCount >= 2)
+                this.rtb_0_Input.TextChanged -= this.rtb_0_Input_TextChanged;
+                try//for start the process
                 {
-                    spaceCount = 0;
+                    SendKeys.Send("{BACKSPACE}");
                 }
-                else
+                catch
                 {
-                    this.rtb_0_Input.TextChanged -= this.rtb_0_Input_TextChanged;
-                    try//for start the process
-                    {
-                        SendKeys.Send("{BACKSPACE}");
-                    }
-                    catch
-                    {
 
-                    }
-                    this.rtb_0_Input.TextChanged += this.rtb_0_Input_TextChanged;
                 }
+                this.rtb_0_Input.TextChanged += this.rtb_0_Input_TextChanged;
             }
 
 
@@ -377,7 +368,7 @@ namespace WindowsFormsApplication3
             //HighlightText(rtb_0_SyncInput, ";", Color.Red, false);
             //HighlightText(rtb_0_SyncInput, "!", Color.Red, false);
 
-
+             
             idx = _taShowChar.WordIdx(_taInput.count - 1);
             len = _taShowChar.WordLen(_taInput.count - 1);
             HighlightText(rtb_0_ShowChar, idx, len, Color.Red, true);

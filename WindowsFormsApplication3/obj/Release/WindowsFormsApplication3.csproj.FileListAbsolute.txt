@@ -1,0 +1,9 @@
+C:\Users\DaveSwift5\Desktop\Github_Proj\MemoriseEngArticle\WindowsFormsApplication3\bin\Release\EngArticle.exe.config
+C:\Users\DaveSwift5\Desktop\Github_Proj\MemoriseEngArticle\WindowsFormsApplication3\bin\Release\EngArticle.exe
+C:\Users\DaveSwift5\Desktop\Github_Proj\MemoriseEngArticle\WindowsFormsApplication3\bin\Release\EngArticle.pdb
+C:\Users\DaveSwift5\Desktop\Github_Proj\MemoriseEngArticle\WindowsFormsApplication3\obj\Release\WindowsFormsApplication3.csprojAssemblyReference.cache
+C:\Users\DaveSwift5\Desktop\Github_Proj\MemoriseEngArticle\WindowsFormsApplication3\obj\Release\WindowsFormsApplication3.Properties.Resources.resources
+C:\Users\DaveSwift5\Desktop\Github_Proj\MemoriseEngArticle\WindowsFormsApplication3\obj\Release\WindowsFormsApplication3.csproj.GenerateResource.cache
+C:\Users\DaveSwift5\Desktop\Github_Proj\MemoriseEngArticle\WindowsFormsApplication3\obj\Release\WindowsFormsApplication3.csproj.CoreCompileInputs.cache
+C:\Users\DaveSwift5\Desktop\Github_Proj\MemoriseEngArticle\WindowsFormsApplication3\obj\Release\EngArticle.exe
+C:\Users\DaveSwift5\Desktop\Github_Proj\MemoriseEngArticle\WindowsFormsApplication3\obj\Release\EngArticle.pdb
