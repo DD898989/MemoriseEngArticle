@@ -1,0 +1,2 @@
+﻿該系統有三種機型:桌上型、桌邊型和架上型。
+The systems are packaged in three basic models: desktop, deskside and rack-mount.

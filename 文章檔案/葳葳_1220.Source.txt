@@ -1,0 +1,2 @@
+這電腦無法開始運作是因為有一片磁碟在驅動氣裡，而不是因為內部任何問題。
+The computer won't start up because there is a floppy disk in the drive, not because of any internal problems.

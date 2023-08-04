@@ -1,0 +1,2 @@
+﻿這船能載一千噸貨物。
+The ship can carry a cargo of 1,000 tons.

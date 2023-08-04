@@ -1,0 +1,2 @@
+﻿有些門上的鎖在關門時會自動把門鎖好。
+Some doors have locks which automatically lock the doors when we close them.

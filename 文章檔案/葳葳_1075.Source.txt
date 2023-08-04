@@ -1,0 +1,2 @@
+﻿按日生息。
+Interest accrues on a daily basis.

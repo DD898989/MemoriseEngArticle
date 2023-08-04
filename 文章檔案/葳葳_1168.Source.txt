@@ -1,0 +1,2 @@
+﻿對於每一項訂貨，你都必須填寫發貨單，並把它釘在收據上。
+For every order, you will need to fill out an invoice and staple it to the receipt.

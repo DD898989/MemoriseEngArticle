@@ -1,0 +1,2 @@
+這是一個全自動功能的機器人。
+This is a fully functional automaton.
