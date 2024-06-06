@@ -13,6 +13,7 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Concurrent;
+using System.Text;
 
 namespace WindowsFormsApplication3
 {
@@ -208,6 +209,17 @@ namespace WindowsFormsApplication3
         public Form1()
         {
             InitializeComponent();
+
+            try
+            {
+                CreateFileWatcher();
+            }
+            catch
+            {
+
+            }
+
+
             if (!File.Exists(ROOT_PATH_PARENT + FILE_LOAD_TEMP))
             {
                 File.WriteAllText(ROOT_PATH_PARENT + FILE_LOAD_TEMP, "");
@@ -457,6 +469,86 @@ namespace WindowsFormsApplication3
             button1_Click_字典(this, null);
         }
         //----------------------------------------------------------------
+
+
+
+
+
+        FileSystemWatcher watcher = new FileSystemWatcher();
+        string path_觀察2 = "C:\\Users\\DaveVivo\\Documents\\GitHub\\LearnMovieEng\\DAVE_GAN_CC_For文章程式.txt";
+        public void CreateFileWatcher()
+        {
+            // Create a new FileSystemWatcher and set its properties.
+
+            var a = Path.GetDirectoryName(path_觀察2);
+            var b = Path.GetFileName(path_觀察2);
+
+            watcher.Path = a;
+            watcher.Filter = b;
+            /* Watch for changes in LastAccess and LastWrite times, and 
+               the renaming of files or directories. */
+            watcher.NotifyFilter = NotifyFilters.LastWrite;
+            // Only watch text files.
+
+            // Add event handlers.
+            watcher.Changed += new FileSystemEventHandler(OnChanged);
+
+            // Begin watching.
+            watcher.EnableRaisingEvents = true;
+        }
+        private delegate void DelShowMessage(object source, FileSystemEventArgs e);
+
+        // Define the event handlers.
+        private void OnChanged(object source, FileSystemEventArgs e)
+        {
+
+            if (this.InvokeRequired)
+            {
+                DelShowMessage del = new DelShowMessage(OnChanged);
+                this.Invoke(del, source, e);
+                return;
+            }
+
+
+            // Specify what is done when a file is changed, created, or deleted.
+
+
+            // https://stackoverflow.com/questions/1764809/filesystemwatcher-changed-event-is-raised-twice
+
+
+            try
+            {
+                watcher.EnableRaisingEvents = false;
+
+                Thread.Sleep(100);//等檔案寫完 不然會exception
+                var test1 = File.ReadAllText(path_觀察2, Encoding.UTF8);
+
+                this.rtb_0_Source.Text = test1;
+            }
+
+            finally
+            {
+                watcher.EnableRaisingEvents = true;
+            }
+
+
+        }
+        // Define the event handlers.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         private void Load_Event()
         {
             this.FormClosing += Form1_FormClosing;
